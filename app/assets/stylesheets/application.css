@@ -1,0 +1,90 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+
+.myButton
+
+{
+  
+ 
+    font-family: Lucida;  
+    font-size: 12px;  
+    font-weight: normal;  
+    background-color:white;  
+    text-decoration: none;  
+    color: black; 
+    border-style:double;
+    border-width:medium;
+    border-color: #556B2F;
+     padding:2px;
+}
+
+
+
+
+body
+{
+  margin-left:5px;
+  margin-top:5px;	
+}
+
+th
+{
+background-color: #C8E3DB;
+text-align:left;
+
+}
+
+tr.odd
+
+{
+background-color: #9999CC;
+
+
+}
+
+tr.even
+
+{
+background-color: #CC9999;
+
+
+}
+td
+
+{
+
+text-align:center;
+}
+
+table {
+	font-size: 12px;
+	font-family:Calibri;
+	border-collapse:collapse;
+	padding:0;
+	width:100%;
+}
+
+td.tbgreen 
+{
+    border-top:solid thin #336600;
+    border-bottom:solid thin #336600;
+}
+
+a:link { 
+ font-family: Calibri,Arial; 
+ font-size: 1em; 
+ color: #002340;
+ margin-left: 0px;
+}
+  
+a:hover {  
+ font-family: Calibri,Arial; 
+ font-size: 1em; 
+ color: #FF0000; 
+} 

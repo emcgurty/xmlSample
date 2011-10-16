@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot>
+  <items>
+    <identifier>i1</identifier>
+    <product>pr1</product>
+    <description>d1</description>
+    <price>p1</price>
+  </items>
+  <items>
+    <identifier>i2</identifier>
+    <product>pr2</product>
+    <description>d2</description>
+    <price>p2</price>
+  </items>
+  <items>
+    <identifier>i3</identifier>
+    <product>pr3</product>
+    <description>d3</description>
+    <price>p3</price>
+  </items>
+  <items>
+    <identifier>i4</identifier>
+    <product>pr4</product>
+    <description>d4</description>
+    <price>p41</price>
+  </items>
+
+ </dataroot>
