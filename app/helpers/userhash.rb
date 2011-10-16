@@ -32,13 +32,7 @@ class Userhash
   end
 
   def app_update(value, int)
-    puts "ASASASASAS"
-    puts "VALUE"
-    puts value
-    puts "int"
-    puts int
-    puts "DONE"
-    @app_hash[int].replace(value)
+     @app_hash[int].replace(value)
   end
 
    def delete_all
