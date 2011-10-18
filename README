@@ -1,10 +1,11 @@
 I wanted to see how difficult it was to build a ROR application that gathered 
 data initially from an XML file and thereafter the user interacted with a hash.
+Toward this task I used REXML and Builder with XMLMarkup.  
 
 I didn't want to cache the data per se.
 
-params allowed rebuild of the know data without returning to the XML file and some 
-fancy foot-work in my html to preserve/capture hash values
+params allowed rebuild of the known data without returning to the XML file and some 
+fancy foot-work in my html (hidden or inline divs) to preserve/capture hash values
 
 Through some calls to perhaps serialization I wasn't successful in eliminating database.yml, 
 a bogus model and the gemfile setting for mysql2
