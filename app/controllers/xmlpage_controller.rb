@@ -1,5 +1,5 @@
 require 'rexml/document'
-
+require 'builder'
 class XmlpageController < ApplicationController 
 
 include REXML
@@ -106,7 +106,7 @@ elsif (params[:commit] == 'Delete Record')
    strMessage = "Cleared All Rows Successful."
  elsif (params[:commit] == 'Port')
    port
-   strMessage = "See code for general design."
+   strMessage = "Your changes have been successfully written to your XML file."
 
 
 else
@@ -124,12 +124,47 @@ end
 private 
 
 def port
-  #See getXML below
-  #gather all row values that are not marked for delete into a hash
-  #convert hash to xml: hash.to_xml
-  #open existing file, clear all elements and replace with hash.to_xml
-  #save file
+
+      
+        items_path =   "C:\\xmlSample\\doc\\items.xml"
+        items_path_bak =   "C:\\xmlSample\\doc\\items_bak.xml"
+        # Look for the existing items.xml file
+             xmlfile = File.rename(items_path, items_path_bak)   
+             xmlfile = File.open(items_path, 'w')
+             
+	  	if xmlfile 
+		  begin
+                  xmlfile.write(generate_xml)  
+                  
+              rescue
+                 ## Later
+
+              end
+            end
 end
+
+
+ def generate_xml
+    doc = Builder::XmlMarkup.new( :target => out_string = "", :indent => 2 )
+    doc.instruct! 
+    doc.dataroot {
+      
+      @uh.app_hash.each do |element_data|
+         doc.items { 
+         if (element_data[1]["status"] != "deleted")
+        	 doc.identifier( element_data[1]["identifier"] )
+             doc.product( element_data[1]["product"] )
+             doc.description( element_data[1]["description"] )
+             doc.price( element_data[1]["price"] )
+
+         end
+       }
+     end
+
+     }  
+
+    return out_string
+  end
 
 def is_numeric?(i)
     i.to_i.to_s == i || i.to_f.to_s == i
@@ -175,7 +210,7 @@ end
   
   
    def search(intSelection, searchValue)
-       ## Obviously I could Reg Expression for better searches
+       ## Obviously I could use Reg Expression for better searches
       intSe = intSelection.to_i
       @uh.app_hash.each do |e|
        if (intSe == 0)  #identifier
@@ -215,10 +250,11 @@ end
   
 def getXML()
   
-         #need to create a hash of item class objects
+        #need to create a hash of item class objects
         items_path =   "C:\\xmlSample\\doc\\items.xml"
         # Look for the existing items.xml file
          	xmlfile = File.open(items_path, 'r')
+            
 		if xmlfile 
 		  # Load the data into @hash
 		  xmldoc = Document.new(xmlfile)
@@ -272,4 +308,3 @@ def getXML()
 end
 
 
-	
