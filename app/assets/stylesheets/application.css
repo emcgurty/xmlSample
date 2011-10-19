@@ -7,6 +7,8 @@
 */
 
 
+
+
 .myButton
 
 {
@@ -25,6 +27,23 @@
 }
 
 
+.blabel
+{
+font-family: Lucida;  
+    font-size: 12px;  
+    font-weight: bold;  
+    color: black; 
+background-color: #C8E3DB;
+
+
+
+}
+
+.tcenter
+
+{
+text-align:center;
+}
 
 
 body
@@ -33,17 +52,12 @@ body
   margin-top:5px;	
 }
 
-th
-{
-background-color: #C8E3DB;
-text-align:left;
-
-}
 
 tr.odd
 
 {
 background-color: #9999CC;
+text-align:center;
 
 
 }
@@ -52,7 +66,7 @@ tr.even
 
 {
 background-color: #CC9999;
-
+text-align:center;
 
 }
 td
