@@ -1,9 +1,4 @@
 
-<html>
-<head>
-<title>Demo of XML to Hash</title>
-</head>
-
 <%= form_tag("new")%>   
    <p>Demo of XML to Hash</p>
 
@@ -104,41 +99,41 @@
        <% myRow = "odd" %>
      <% end %>
 <% if k[1]["searchresult"] %>
-  <div style="display:inline">
- <% else %>
-  <div style="display:none">
-<% end %>
-<table>
+  <div style="display:inline;float:left;width:100%">
+    <% else %>
+  <div style="display:none;float:left;width:100%">
+  <% end %>
+
    <% if boolShowheader %>
-    <tr>
-   <th size=5%>Row Num</th>
-   <th size=15%>Identifier</th>
-   <th size=15%>Product</th>
-   <th size=15%>Description</th>
-   <th size=15%>Price</th>
-   <th size=15%>Status</th>
-   <th size=0%></th>
-   <th size=10%><%= submit_tag "Keep Record",  { :class=>"myButton" }      %></th>
-   <th size=10%><%= submit_tag  "Delete Record", {:class=>"myButton" } %></th>
+   <table width=100%>
+   <tr style="background-color: #C8E3DB;">
+   <td width=10% class=blabel><%= label_tag "Row Num" %></td>
+   <td width="15%" class=blabel><%= label_tag "Identifier", nil, :size=>10 %></td>
+   <td width="15%" class=blabel><%= label_tag "Product", nil, :size=>10 %></td>
+   <td width="15%" class=blabel><%= label_tag "Description", nil, :size=>10 %></td>
+   <td width=15% class=blabel><%= label_tag "Price", nil, :size=>10 %></td>
+   <td width=10% class=blabel><%= label_tag "Status", nil, :size=>10 %></td>
+   <td width=0%></td>
+   <td width=10%><%= submit_tag "Keep Record",  { :class=>"myButton", :size => "10" }      %></td>
+   <td width=10%><%= submit_tag  "Delete Record", {:class=>"myButton", :size => "10" } %></td>
    </tr>
+   </table>
   <% boolShowheader = false %>
   <% end %>
-   <tr class=<%= myRow -%> >
-   <td size=5%><%= k[0] %></td>   
-   <td size=15%><%=h text_field_tag "identifier" + i.to_s, k[1]["identifier"], :maxlength=>6, :size => 10 %></td>
-   <td size=15%><%=h text_field_tag "product" + i.to_s, k[1]["product"], :maxlength=>12, :size => 10 %></td>
-   <td size=15%><%=h text_field_tag "description" + i.to_s, k[1]["description"], :maxlength=>24, :size => 10 %></td>
-   <td size=15%><%=h text_field_tag "price" + i.to_s, k[1]["price"], :maxlength=>6, :size => 10 %></td>
-   <td size=15%><%=h text_field_tag "status" + i.to_s, k[1]["status"], :maxlength=>6, :size => 10, :disabled => true  %></td>
-   <td size=0%><%=h hidden_field_tag "searchresult" + i.to_s, k[1]["searchresult"]  %></td>
-   <td size=10%><%= check_box_tag "Keep" + i.to_s , true %></td>
-   <td size=10%><%= check_box_tag "Delete" + i.to_s , true %></td>
+ <table>
+  <tr class=<%= myRow -%> >
+   <td width="10%" class=tcenter><%= k[0] %></td>   
+   <td width=15%><%=h text_field_tag "identifier" + i.to_s, k[1]["identifier"], :maxlength=>6, :size => 10 %></td>
+   <td width=15%><%=h text_field_tag "product" + i.to_s, k[1]["product"], :maxlength=>12, :size => 10 %></td>
+   <td width=15%><%=h text_field_tag "description" + i.to_s, k[1]["description"], :maxlength=>24, :size => 10 %></td>
+   <td width=15%><%=h text_field_tag "price" + i.to_s, k[1]["price"], :maxlength=>6, :size => 10 %></td>
+   <td width=10%><%=h text_field_tag "status" + i.to_s, k[1]["status"], :maxlength=>6, :size => 10, :disabled => true  %></td>
+   <td width=0%><%=h hidden_field_tag "searchresult" + i.to_s, k[1]["searchresult"]  %></td>
+   <td width=10%><%= check_box_tag "Keep" + i.to_s , false %></td>
+   <td width=10%><%= check_box_tag "Delete" + i.to_s , false %></td>
    </tr>   
 </table>
 </div>
 <% end %>  
 <% end %>  
 
-</body>
-
-</html>
