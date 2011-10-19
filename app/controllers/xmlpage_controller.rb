@@ -29,8 +29,23 @@ if !(params[:icount].nil?)
 end
 
 if (params[:commit] == 'Build Rows')
-       build_rows
-       strMessage = "Build Rows Successful."
+
+ if !(params[:num_rows].to_s.strip.blank?)
+         if is_numeric?(params[:num_rows].to_s)
+			intParam = params[:num_rows].to_i
+                      if (intParam > 0) && (intParam < 21)
+				build_rows
+                        strMessage = "Build Rows Successful."
+                      else
+				strMessage = "Build row value must be numeric and greater than 0 and less than 21."
+                      end
+            end
+      else
+        strMessage = "Build row value must be numeric and greater than 0 and less than 21."
+      end
+      
+
+       
 elsif (params[:commit] == 'Reload')
       getXML
       strMessage = "Reload Rows Successful."
@@ -110,7 +125,7 @@ elsif (params[:commit] == 'Delete Record')
 
 
 else
-  getXML
+ strMessage = getXML
 
 end
  
@@ -145,7 +160,7 @@ end
 
 
  def generate_xml
-    doc = Builder::XmlMarkup.new( :target => out_string = "", :indent => 2 )
+    doc = Builder::XmlMarkup.new( :target => output_string = "", :indent => 2 )
     doc.instruct! 
     doc.dataroot {
       
@@ -163,7 +178,7 @@ end
 
      }  
 
-    return out_string
+    return output_string
   end
 
 def is_numeric?(i)
@@ -211,6 +226,7 @@ end
   
    def search(intSelection, searchValue)
        ## Obviously I could use Reg Expression for better searches
+       ## and in serialization I think I could have used AREL
       intSe = intSelection.to_i
       @uh.app_hash.each do |e|
        if (intSe == 0)  #identifier
@@ -253,9 +269,10 @@ def getXML()
         #need to create a hash of item class objects
         items_path =   "C:\\xmlSample\\doc\\items.xml"
         # Look for the existing items.xml file
-         	xmlfile = File.open(items_path, 'r')
+         	if File.exists?(items_path)
+
+            xmlfile = File.open(items_path, 'r')
             
-		if xmlfile 
 		  # Load the data into @hash
 		  xmldoc = Document.new(xmlfile)
      
@@ -302,7 +319,29 @@ def getXML()
                end
 
             @uh = Userhash.new(1,@hash_temp)
-         end
+        strMessage = "Application loaded with the following items.xml values."
+          else
+
+              xmlfile = File.new(items_path, 'w')
+              xmlfile.write(generate_new_xml)
+              
+            @hash_temp = Hash.new
+            @hash_temp["1"]      = { "identifier" => "", 
+                              "product" => "", "description" => "", 
+                              "price" => "", "status"=>"", "searchresult"=>true}
+              @uh = Userhash.new(1,@hash_temp)
+              strMessage = "Application loaded. Items.xml was not found, and was created with no values."
+         
+         end  #closes if
+     end  #closes getXL
+
+     def generate_new_xml
+     
+		doc = Builder::XmlMarkup.new( :target => output_string = "", :indent => 2 )
+		doc.instruct! 
+	      doc.dataroot {}
+     
+            return output_string 
      end
 
 end
