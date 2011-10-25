@@ -6,7 +6,6 @@ include REXML
 
 def new
 
-
 flash[:notice] = ""
 strMessage = "Application Loaded"
 if !(params[:icount].nil?)
@@ -59,10 +58,11 @@ elsif (params[:commit] == 'Search')
         end 
 elsif (params[:commit] == 'Clear Search')
          clear_search
-elsif (params[:commit] == 'Keep Record')
- params.each do |e|
-          if e[1] == "true"
-               mye = e[0].gsub("Keep",'').strip
+elsif (params[:commit] == 'Selected Keep')
+
+params.each do |e|
+          if e[1] == "1"
+               mye = e[0].gsub("kp",'').strip
                     if is_numeric?(mye)
                     if (params["identifier" + mye].to_s.strip.empty? or 
                             params["product" + mye].to_s.strip.empty? or
@@ -73,11 +73,12 @@ elsif (params[:commit] == 'Keep Record')
 				
                       else
 			
-                             if (params["status" + mye].to_s == "new")
+                            if (params["status" + mye].to_s == "new")
                                strStatus = "new"
-                             else
+                             elsif (params["status" + mye].to_s == "")
                                strStatus = "changed"
-				     end	
+				     end
+                            
                               @hash_temp = Hash.new
                               @hash_temp = { "identifier" => params["identifier" + mye], 
                               "product" => params["product" + mye], 
@@ -95,11 +96,11 @@ elsif (params[:commit] == 'Keep Record')
                   end # close numeric
 	     end  # closes true		
       end  #closes do
-      
-elsif (params[:commit] == 'Delete Record')
+                           
+elsif (params[:commit] == 'Selected Delete')
         params.each do |e|
-          if e[1] == "true"
-               mye = e[0].gsub("Delete",'').strip
+          if e[1] == "1"
+               mye = e[0].gsub("dlt",'').strip
                    if is_numeric?(mye)
 				      @hash_temp = Hash.new
                               @hash_temp = { "identifier" => params["identifier" + mye], 
@@ -225,15 +226,15 @@ end
   
   
    def search(intSelection, searchValue)
-       ## Obviously I could use Reg Expression for better searches
-       ## and in serialization I think I could have used AREL
+      ## Obviously I could use Reg Expression for better searches
+      ## and in serialization I think I could have used AREL
       intSe = intSelection.to_i
       @uh.app_hash.each do |e|
        if (intSe == 0)  #identifier
          if (e[1]["identifier"].to_s != searchValue)
              e[1]["searchresult"] = false
          else
-             e[1]["searchresult"] = true
+           e[1]["searchresult"] = true
          end
        elsif (intSe == 1)  #product
          if (e[1]["product"].to_s != searchValue)

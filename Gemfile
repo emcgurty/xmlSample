@@ -16,7 +16,8 @@ gem 'mysql2'
 #  gem 'uglifier'
 #end
 
-#gem 'jquery-rails'
+###  Now using jquery
+gem 'jquery-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'

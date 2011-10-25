@@ -4,25 +4,25 @@
     <identifier>i1</identifier>
     <product>pr1</product>
     <description>d1</description>
-    <price>p1</price>
+    <price>111</price>
   </items>
   <items>
     <identifier>i2</identifier>
     <product>pr2</product>
     <description>d2</description>
-    <price>p2</price>
+    <price>222</price>
   </items>
   <items>
     <identifier>i3</identifier>
     <product>pr3</product>
     <description>d3</description>
-    <price>p3</price>
+    <price>333</price>
   </items>
   <items>
     <identifier>i4</identifier>
     <product>pr4</product>
     <description>d4</description>
-    <price>p41</price>
+    <price>444</price>
   </items>
 
  </dataroot>

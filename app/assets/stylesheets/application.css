@@ -6,16 +6,18 @@
  *= require_tree . 
 */
 
+input.emessage
 
+{border:none;
+ display: flat;
+ color:#5B0080; 
+ font-family: Lucida;  
+ font-size: 14px;  
+}
 
 
 .myButton
-
 {
-  
- 
-    font-family: Lucida;  
-    font-size: 12px;  
     font-weight: normal;  
     background-color:white;  
     text-decoration: none;  
@@ -23,7 +25,13 @@
     border-style:double;
     border-width:medium;
     border-color: #556B2F;
-     padding:2px;
+    padding:2px;
+}
+
+.myButton:hover
+{
+ font-family: Calibri,Arial; 
+ color: #336600;  
 }
 
 
@@ -34,10 +42,19 @@ font-family: Lucida;
     font-weight: bold;  
     color: black; 
 background-color: #C8E3DB;
-
-
-
 }
+
+
+.readonlylabel
+{
+    font-family: Lucida;  
+    font-size: 12px;  
+    font-weight: normal;  
+    background-color:yellow;  
+    text-decoration: none;  
+    color: black; 
+}
+
 
 .tcenter
 
@@ -90,15 +107,3 @@ td.tbgreen
     border-bottom:solid thin #336600;
 }
 
-a:link { 
- font-family: Calibri,Arial; 
- font-size: 1em; 
- color: #002340;
- margin-left: 0px;
-}
-  
-a:hover {  
- font-family: Calibri,Arial; 
- font-size: 1em; 
- color: #FF0000; 
-} 
