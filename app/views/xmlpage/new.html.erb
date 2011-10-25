@@ -7,10 +7,13 @@
 <%= flash[:notice] %>
 </div>
 <% end %>
+<div id="errormessage" style="display:none">
+<input id="lblerror" type="label" value="" size="100" class="emessage"/>
+</div>
 
 
 <%= hidden_field_tag "icount",  @itemvals.count  %>
-   <div id="divManual" runat="server" style="display:inline">
+<div id="divManual" runat="server" style="display:inline;color:#232456;">
         
     <table >
         <tr>
@@ -29,7 +32,14 @@
             <td style="width: 12%">
 
           
-            <%= submit_tag  "Build Rows", {:class=>"myButton" }  %></td>
+<!---            <input type=button id="build_rows" class="myButton" value="Build Rows"/> --->
+             
+<%= submit_tag "Build Rows" , {:class=>"myButton" } %></
+</td>
+
+
+
+
             <td width=25%><%= submit_tag "Clear All" , {:class=>"myButton" } %></td>
             <td width=5%></td>
        </tr>
@@ -69,26 +79,24 @@
         </tr>
       <tr bgcolor="#ffcc33">         
             <td width="2%">&nbsp;</td>
-            <td style="width: 16%">Port all to XML:</td>
-            <td style="width: 27%"><%= submit_tag "Port", {:class=>"myButton" } %></td> 
+            <td width="16%">Port all to XML:</td>
+            <td width="27%"><%= submit_tag "Port", {:class=>"myButton" } %></td> 
             <td width="25%">Reload XML Rows:</td>
             <td width="30%"><%= submit_tag "Reload", {:class=>"myButton" } %></td>
             <td width=5%></td>
         </tr>
         <tr >
             <td width="2%">&nbsp;</td>
-            <td style="width: 16%">&nbsp;</td>
-            <td style="width: 27%">&nbsp;</td>
+            <td width="16%">&nbsp;</td>
+            <td width="27%">&nbsp;</td>
             <td width="25%">&nbsp;</td>
             <td width="30%">&nbsp;</td>
             <td width=5%></td>
-        </tr>
+       
+
       </table>
-      <br />
 
- <% i = 0 %>
-
-
+<% i = 0 %>
 <% boolShowheader = true %>
 <% @itemvals.each do |k| %>
   <% i = i + 1 %>
@@ -98,42 +106,57 @@
       <% else %>
        <% myRow = "odd" %>
      <% end %>
-<% if k[1]["searchresult"] %>
-  <div style="display:inline;float:left;width:100%">
-    <% else %>
-  <div style="display:none;float:left;width:100%">
-  <% end %>
+
 
    <% if boolShowheader %>
    <table width=100%>
    <tr style="background-color: #C8E3DB;">
-   <td width=10% class=blabel><%= label_tag "Row Num" %></td>
-   <td width="15%" class=blabel><%= label_tag "Identifier", nil, :size=>10 %></td>
-   <td width="15%" class=blabel><%= label_tag "Product", nil, :size=>10 %></td>
-   <td width="15%" class=blabel><%= label_tag "Description", nil, :size=>10 %></td>
-   <td width=15% class=blabel><%= label_tag "Price", nil, :size=>10 %></td>
-   <td width=10% class=blabel><%= label_tag "Status", nil, :size=>10 %></td>
+   <td width=10% class=blabel></td>
+   <td width="15%" class=blabel></td>
+   <td width="15%" class=blabel></td>
+   <td width="15%" class=blabel></td>
+   <td width=15% class=blabel></td>
+   <td width=10% class=blabel></td>
    <td width=0%></td>
-   <td width=10%><%= submit_tag "Keep Record",  { :class=>"myButton", :size => "10" }      %></td>
-   <td width=10%><%= submit_tag  "Delete Record", {:class=>"myButton", :size => "10" } %></td>
+   <td width=10%><input type="button" id="keep_rows" class=myButton  value="Keep All" /></td>
+   <td width=10%><input type="button" id="delete_rows" class=myButton value="Delete All" /></td>
+   </tr>
+
+   <tr style="background-color: #C8E3DB;">
+   <td width=10% class=blabel><%= label_tag "Row Num" %></td>
+   <td width="15%" class=blabel><%= label_tag "Identifier", nil %></td>
+   <td width="15%" class=blabel><%= label_tag "Product", nil %></td>
+   <td width="15%" class=blabel><%= label_tag "Description", nil %></td>
+   <td width=15% class=blabel><%= label_tag "Price", nil %></td>
+   <td width=10% class=blabel><%= label_tag "Status (Readonly)", nil %></td>
+   <td width=0%></td>
+   <td width=10%><%= submit_tag "Selected Keep",  { :class=>"myButton" }      %></td>
+   <td width=10%><%= submit_tag  "Selected Delete", {:class=>"myButton" } %></td>
    </tr>
    </table>
   <% boolShowheader = false %>
   <% end %>
+<% if (k[1]["searchresult"]) %>
+  <div style="display:inline"  >
+    <% else %>
+  <div style="display:none"  > 
+  <% end %>
  <table>
   <tr class=<%= myRow -%> >
    <td width="10%" class=tcenter><%= k[0] %></td>   
+   
    <td width=15%><%=h text_field_tag "identifier" + i.to_s, k[1]["identifier"], :maxlength=>6, :size => 10 %></td>
-   <td width=15%><%=h text_field_tag "product" + i.to_s, k[1]["product"], :maxlength=>12, :size => 10 %></td>
-   <td width=15%><%=h text_field_tag "description" + i.to_s, k[1]["description"], :maxlength=>24, :size => 10 %></td>
-   <td width=15%><%=h text_field_tag "price" + i.to_s, k[1]["price"], :maxlength=>6, :size => 10 %></td>
-   <td width=10%><%=h text_field_tag "status" + i.to_s, k[1]["status"], :maxlength=>6, :size => 10, :disabled => true  %></td>
-   <td width=0%><%=h hidden_field_tag "searchresult" + i.to_s, k[1]["searchresult"]  %></td>
-   <td width=10%><%= check_box_tag "Keep" + i.to_s , false %></td>
-   <td width=10%><%= check_box_tag "Delete" + i.to_s , false %></td>
+   <td width=15%><%=h text_field_tag "product" + i.to_s, k[1]["product"],  :maxlength=>12, :size => 10 %></td>
+   <td width=15%><%=h text_field_tag "description" + i.to_s, k[1]["description"]  , :maxlength=>24, :size => 10 %></td>
+   <td width=15%><%=h text_field_tag "price" + i.to_s, k[1]["price"] ,  :maxlength=>6, :size => 10 %></td>
+   <td width=10%><%=h text_field_tag "status" + i.to_s, k[1]["status"] ,  :maxlength=>6, :size => 10, :readonly => "readonly"  %></td>
+   <td width=0%><%=h hidden_field_tag "searchresult" + i.to_s, k[1]["searchresult"]   %></td>
+   <td width=10%><%= check_box_tag  "kp" + i.to_s    %></td>
+   <td width=10%><%= check_box_tag  "dlt" + i.to_s    %></td>
    </tr>   
 </table>
 </div>
-<% end %>  
+
 <% end %>  
 
+<% end %>  
