@@ -13,26 +13,31 @@
        $(document).ready(function(){
       
        
-       $('#lblerror').attr("value", "");
+       function showMessage(msg) 
+           {
+             $('#lblerror').attr("value", msg);
+             $('#errormessage').css("display", "inline");
+           }
+
+
+      $('#lblerror').attr("value", "");
        $('div.errormessage').css('display', 'none');
 
        $(":checkbox").change(function(event){
-       $("#errormessage").css("display", "none");
+          $("#errormessage").css("display", "none");
           var myid = $(this).attr('name');
             var isChecked = $(this).attr('checked');
             if (isChecked )
                   { 
                  var myRow = myid.match(/[0-9]+/); 
-       
+                 ///($('myid:contains("dlt")'))
                  if (myid.indexOf('dlt') == 0)  
                      {
                        var dk1 = 'input[name="kp' + myRow + '"]';
                        var dlk1 = $(dk1);
                        if (dlk1.attr('checked'))
                          {   
-                             var message = 'You have already selected to keep row number ' + myRow + '.';
-                             $('#lblerror').attr("value", message);
-                             $('#errormessage').css("display", "inline");
+                             showMessage('You have already selected to keep row number ' + myRow + '.');
 
                          }
 				
@@ -43,9 +48,7 @@
                        var dlk2 = $(dk2);
                        if (dlk2.attr('checked'))
                          {  
-                             var message = 'You have already selected to delete row number ' + myRow + '.';
-                             $("#lblerror").attr("value", message);
-                             $("#errormessage").css("display", "inline");
+                             showMessage('You have already selected to delete row number ' + myRow + '.');
 
                          }
 				
@@ -97,7 +100,30 @@
 
        });
 
+       var numRows = $("#num_rows")
 
-       });
+       numRows.change(function(event) {
+          var nr = numRows.val().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+          var isNum = /^\d+$/;
+          if (!isNum.test(nr))
+             {
+                 showMessage("Please enter a numeric value.");
+                 var setNum ='input[name="num_rows"]'
+		     $(setNum).focus();
+                 $(setNum).select();         ////Doesn't work
+                 //numRows.focus().select();         ////Doesn't work either
+             }
+         else
+            {
+         
+          if ((nr < 0) || (nr > 20)) 
+                {
+                 showMessage("The number you have entered must be greater than 0 and less than 20.");
+                 }
+		}
+      
+   });
+
+   });
 
 

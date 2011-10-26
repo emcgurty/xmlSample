@@ -30,7 +30,7 @@ end
 if (params[:commit] == 'Build Rows')
 
  if !(params[:num_rows].to_s.strip.blank?)
-         if is_numeric?(params[:num_rows].to_s)
+           if is_numeric?(params[:num_rows].to_s)
 			intParam = params[:num_rows].to_i
                       if (intParam > 0) && (intParam < 21)
 				build_rows
@@ -38,9 +38,12 @@ if (params[:commit] == 'Build Rows')
                       else
 				strMessage = "Build row value must be numeric and greater than 0 and less than 21."
                       end
+            else
+               strMessage = "Build row value must be numeric and greater than 0 and less than 21."
+  
             end
       else
-        strMessage = "Build row value must be numeric and greater than 0 and less than 21."
+        strMessage = "Please provide a numeric value greater than 0 and less than 21 in 'Enter the number of sample rows'."
       end
       
 

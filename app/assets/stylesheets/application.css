@@ -9,7 +9,7 @@
 input.emessage
 
 {border:none;
- display: flat;
+ 
  color:#5B0080; 
  font-family: Lucida;  
  font-size: 14px;  
@@ -107,3 +107,15 @@ td.tbgreen
     border-bottom:solid thin #336600;
 }
 
+a:link { 
+ font-family: Calibri,Arial; 
+ font-size: 1em; 
+ color: #002340;
+ margin-left: 0px;
+}
+  
+a:hover {  
+ font-family: Calibri,Arial; 
+ font-size: 1em; 
+ color: #FF0000; 
+} 
